@@ -8,59 +8,49 @@ class CheckOutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          ),
+        ),
+        title: const Text('Checkout',
+                    style: TextStyle(
+                        fontSize: 20, fontWeight: FontWeight.w500 , color: Colors.black)),
+        backgroundColor: Colors.white,
+        elevation: 0,
+      ),
       body: Center(
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            VerticalDivider(thickness: 5,),
-            Divider(thickness: 5,)
-        ],),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              QrImage(
+                data:
+                    "https://payment.spw.challenge/checkout?price=$totalPrice",
+                version: QrVersions.auto,
+                size: 200.0,
+              ),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 30),
+                child: Text('Scan & Pay',
+                    style: TextStyle(
+                        fontSize: 30, fontWeight: FontWeight.bold)),
+              ),
+              Text('\$$totalPrice',
+                  style: const TextStyle(
+                      fontSize: 28, fontWeight: FontWeight.w500))
+            ],
+          ),
+        ),
       ),
     );
-    // return Scaffold(
-    //   backgroundColor: Colors.white,
-    //   appBar: AppBar(
-    //     leading: IconButton(
-    //       onPressed: () {
-    //         Navigator.pop(context);
-    //       },
-    //       icon: const Icon(
-    //         Icons.arrow_back_ios,
-    //         color: Colors.black,
-    //       ),
-    //     ),
-    //     title: const Text('Checkout',
-    //                 style: TextStyle(
-    //                     fontSize: 20, fontWeight: FontWeight.w500 , color: Colors.black)),
-    //     backgroundColor: Colors.white,
-    //     elevation: 0,
-    //   ),
-    //   body: Center(
-    //     child: SizedBox(
-    //       height: MediaQuery.of(context).size.height,
-    //       child: Column(
-    //         mainAxisAlignment: MainAxisAlignment.center,
-    //         crossAxisAlignment: CrossAxisAlignment.center,
-    //         children: [
-    //           QrImage(
-    //             data:
-    //                 "https://payment.spw.challenge/checkout?price=$totalPrice",
-    //             version: QrVersions.auto,
-    //             size: 200.0,
-    //           ),
-    //           const Padding(
-    //             padding: EdgeInsets.symmetric(vertical: 30),
-    //             child: Text('Scan & Pay',
-    //                 style: TextStyle(
-    //                     fontSize: 30, fontWeight: FontWeight.bold)),
-    //           ),
-    //           Text('\$$totalPrice',
-    //               style: const TextStyle(
-    //                   fontSize: 28, fontWeight: FontWeight.w500))
-    //         ],
-    //       ),
-    //     ),
-    //   ),
-    // );
   }
 }
